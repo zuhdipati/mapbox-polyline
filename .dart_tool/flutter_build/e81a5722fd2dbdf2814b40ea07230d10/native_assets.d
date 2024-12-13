@@ -1,0 +1,1 @@
+ /Users/zuhdi/Documents/Flutter\ Portofolio/mapbox-polyline/.dart_tool/flutter_build/e81a5722fd2dbdf2814b40ea07230d10/native_assets.yaml: 
