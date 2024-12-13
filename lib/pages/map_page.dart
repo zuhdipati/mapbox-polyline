@@ -38,32 +38,42 @@ class MapPage extends StatelessWidget {
                     color: Colors.white.withOpacity(1),
                     padding: const EdgeInsets.only(bottom: 30),
                     child: Column(
-                      children: List.generate(
-                        mapProvider.markers.length,
-                        (index) {
-                          final markers = mapProvider.markers[index];
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Marker ${index + 1}"),
-                                Text(" ${markers.lat}\n${markers.lng}"),
-                                const SizedBox(width: 10),
-                                GestureDetector(
-                                  onTap: () => mapProvider.deleteMarker(Point(
-                                    coordinates:
-                                        Position(markers.lng, markers.lat),
-                                  )),
-                                  child: const Icon(Icons.close,
-                                      size: 20, color: Colors.red),
+                      children: [
+                        Column(
+                          children: List.generate(
+                            mapProvider.markers.length,
+                            (index) {
+                              final markers = mapProvider.markers[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Marker ${index + 1}"),
+                                    Text(" ${markers.lat}\n${markers.lng}"),
+                                    const SizedBox(width: 10),
+                                    GestureDetector(
+                                      onTap: () =>
+                                          mapProvider.deleteMarker(Point(
+                                        coordinates:
+                                            Position(markers.lng, markers.lat),
+                                      )),
+                                      child: const Icon(Icons.close,
+                                          size: 20, color: Colors.red),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                              );
+                            },
+                          ),
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              mapProvider.changeTheme();
+                            },
+                            child: const Text("Change Theme"))
+                      ],
                     ),
                   ),
                 ),

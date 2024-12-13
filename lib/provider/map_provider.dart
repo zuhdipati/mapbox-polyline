@@ -31,6 +31,7 @@ class MapProvider extends ChangeNotifier {
   String _directionUrl = '';
 
   bool loadSearch = false;
+  bool _isDarkMode = false;
   List<SuggestionModel> suggestions = [];
   List<FeatureModel> retrieve = [];
 
@@ -41,6 +42,7 @@ class MapProvider extends ChangeNotifier {
     zoom: 12,
   );
 
+  bool get isDarkMode => _isDarkMode;
   bool get hideMarkerList => _hideMarkerList;
   List<Position> get markers => _markers;
 
@@ -214,6 +216,16 @@ class MapProvider extends ChangeNotifier {
 
   void onTapMarkerList() {
     _hideMarkerList = !_hideMarkerList;
+    notifyListeners();
+  }
+
+  void changeTheme() {
+    String darkStyle = 'mapbox://styles/mapbox/navigation-night-v1';
+    String lightStyle = 'mapbox://styles/mapbox/navigation-day-v1';
+
+    _isDarkMode = !_isDarkMode;
+    _mapboxMap!.loadStyleURI(_isDarkMode ? darkStyle : lightStyle);
+
     notifyListeners();
   }
 }
